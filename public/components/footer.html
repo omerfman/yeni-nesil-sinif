@@ -1,0 +1,157 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-icon">🎓</span>
+          <span class="logo-text">Yeni Nesil Sınıf</span>
+        </div>
+        <p class="footer-description">
+          Modern online eğitim platformu. Uzman öğretmenlerden birebir ders alın, esneklik ve kalitenin tadını çıkarın.
+        </p>
+      </div>
+      
+      <!-- Links -->
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Platform</h4>
+          <a href="/teachers/index.html">Öğretmenler</a>
+          <a href="/auth/register.html">Kayıt Ol</a>
+          <a href="/auth/login.html">Giriş Yap</a>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Destek</h4>
+          <a href="/help.html">Yardım Merkezi</a>
+          <a href="/contact.html">İletişim</a>
+          <a href="/faq.html">SSS</a>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Yasal</h4>
+          <a href="/privacy.html">Gizlilik Politikası</a>
+          <a href="/terms.html">Kullanım Koşulları</a>
+          <a href="/cookies.html">Çerez Politikası</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="footer-bottom">
+      <p>&copy; 2025 Yeni Nesil Sınıf. Tüm hakları saklıdır.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="LinkedIn">💼</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-text);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 0 1.5rem;
+    margin-top: auto;
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .footer-brand {
+    max-width: 400px;
+  }
+  
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-description {
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  
+  .footer-column h4 {
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-column a {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    transition: color var(--transition-fast);
+  }
+  
+  .footer-column a:hover {
+    color: white;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.875rem;
+  }
+  
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .footer-social a {
+    font-size: 1.5rem;
+    transition: transform var(--transition-fast);
+  }
+  
+  .footer-social a:hover {
+    transform: scale(1.2);
+  }
+  
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .footer-links {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
