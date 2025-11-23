@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Admin Dashboard -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h1>Admin Paneli</h1>
+                <p>Platform yönetimi ve istatistikler</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3 id="total-users">-</h3>
+                        <p>Toplam Kullanıcı</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👨‍🏫</div>
+                    <div class="stat-content">
+                        <h3 id="total-teachers">-</h3>
+                        <p>Öğretmen</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📅</div>
+                    <div class="stat-content">
+                        <h3 id="total-bookings">-</h3>
+                        <p>Toplam Randevu</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-content">
+                        <h3 id="total-assignments">-</h3>
+                        <p>Ödev</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="admin-actions">
+                <h2>Hızlı İşlemler</h2>
+                <div class="action-grid">
+                    <a href="/admin/create-teacher.html" class="action-card">
+                        <div class="action-icon">➕</div>
+                        <h3>Öğretmen Ekle</h3>
+                        <p>Yeni öğretmen hesabı oluştur</p>
+                    </a>
+                    <a href="/students/index.html" class="action-card">
+                        <div class="action-icon">👨‍🎓</div>
+                        <h3>Öğrenciler</h3>
+                        <p>Tüm öğrencileri görüntüle</p>
+                    </a>
+                    <a href="/teachers/index.html" class="action-card">
+                        <div class="action-icon">👨‍🏫</div>
+                        <h3>Öğretmenler</h3>
+                        <p>Tüm öğretmenleri yönet</p>
+                    </a>
+                    <a href="#" class="action-card" onclick="alert('Yakında eklenecek'); return false;">
+                        <div class="action-icon">⚙️</div>
+                        <h3>Ayarlar</h3>
+                        <p>Platform ayarlarını düzenle</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="admin-activity">
+                <h2>Son Aktiviteler</h2>
+                <div class="activity-list" id="recent-activity">
+                    <div class="empty-state">
+                        <p>Aktivite yükleniyor...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/authGuard.js"></script>
+    
+    <script>
+        // Check admin role
+        checkRole('admin', '/');
+        
+        // Load stats
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Wait for Firebase to initialize
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                const db = window.fb.db;
+                
+                // Get counts
+                const usersSnapshot = await db.collection('users').get();
+                const teachersSnapshot = await db.collection('users').where('role', '==', 'teacher').get();
+                const bookingsSnapshot = await db.collection('bookings').get();
+                const assignmentsSnapshot = await db.collection('assignments').get();
+                
+                document.getElementById('total-users').textContent = usersSnapshot.size;
+                document.getElementById('total-teachers').textContent = teachersSnapshot.size;
+                document.getElementById('total-bookings').textContent = bookingsSnapshot.size;
+                document.getElementById('total-assignments').textContent = assignmentsSnapshot.size;
+                
+                // Load recent activity
+                loadRecentActivity();
+            } catch (error) {
+                console.error('Error loading stats:', error);
+            }
+        });
+        
+        async function loadRecentActivity() {
+            const container = document.getElementById('recent-activity');
+            container.innerHTML = '<div class="empty-state"><p>Son aktiviteler yakında eklenecek</p></div>';
+        }
+    </script>
+</body>
+</html>
+
+<style>
+.admin-section {
+    padding: 3rem 0;
+    min-height: 100vh;
+    background-color: var(--color-bg-secondary);
+}
+
+.admin-header {
+    margin-bottom: 2rem;
+}
+
+.admin-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.admin-header p {
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+}
+
+.stat-content h3 {
+    font-size: 2rem;
+    margin: 0 0 0.25rem 0;
+    color: var(--color-text);
+}
+
+.stat-content p {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+}
+
+.admin-actions,
+.admin-activity {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.admin-actions h2,
+.admin-activity h2 {
+    margin-bottom: 1.5rem;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.action-card:hover {
+    background: var(--color-bg-muted);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.action-card h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0.5rem;
+}
+
+.action-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.activity-list {
+    min-height: 200px;
+}
+</style>
