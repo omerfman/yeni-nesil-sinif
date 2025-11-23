@@ -3,12 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "/api/:path*"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/public/:path*"
     }
   ],
+  "cleanUrls": true,
+  "trailingSlash": false,
   "functions": {
     "api/**/*.js": {
       "memory": 1024,
