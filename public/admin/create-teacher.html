@@ -177,45 +177,22 @@
             submitBtn.textContent = 'Oluşturuluyor...';
             
             try {
-                // Create user account
-                const auth = window.fb.auth;
-                const db = window.fb.db;
-                
-                // NOTE: This approach creates user in current client which logs admin out
-                // Better approach: Use Cloud Function or Firebase Admin SDK
-                // For now, we'll create the Firestore doc directly and let teacher register
-                
-                // Check if email already exists
-                const existingUser = await db.collection('users')
-                    .where('email', '==', data.email)
-                    .limit(1)
-                    .get();
-                
-                if (!existingUser.empty) {
-                    throw new Error('Bu e-posta adresi zaten kullanımda');
+                // Create teacher account via serverless function
+                const response = await fetch('/api/createTeacher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Bir hata oluştu');
                 }
                 
-                // Create teacher profile (pending account creation)
-                const teacherRef = await db.collection('users').add({
-                    email: data.email,
-                    displayName: data.displayName,
-                    phone: data.phone,
-                    bio: data.bio,
-                    subjects: data.subjects,
-                    hourlyRate: data.hourlyRate,
-                    imageUrl: data.imageUrl,
-                    role: 'teacher',
-                    isActive: true,
-                    rating: 0,
-                    totalReviews: 0,
-                    createdAt: window.fb.firebase.firestore.FieldValue.serverTimestamp(),
-                    updatedAt: window.fb.firebase.firestore.FieldValue.serverTimestamp(),
-                    // Temporary password stored (in real app, use Cloud Function to create auth user)
-                    _tempPassword: data.password,
-                    _accountCreated: false,
-                });
-                
-                successEl.textContent = `✅ Öğretmen profili oluşturuldu! Öğretmen ${data.email} ile kayıt olmalıdır.`;
+                successEl.textContent = `✅ ${result.message} - ${result.email}`;
                 successEl.style.display = 'block';
                 
                 // Reset form
