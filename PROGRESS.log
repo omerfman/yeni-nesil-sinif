@@ -1,5 +1,19 @@
 # PROGRESS LOG - Yeni Nesil Sınıf
 
+2025-11-23T12:37:00 | CHECKLIST 1 | Initialize repo structure, folders, README | DONE | commit: 53e4153
+2025-11-23T12:38:00 | CHECKLIST 2 | Add .gitignore, env example, vercel config | DONE | commit: c2f1f81
+2025-11-23T12:39:00 | CHECKLIST 3 | Create modern homepage with hero and sections | DONE | commit: a8400c8
+2025-11-23T12:40:00 | CHECKLIST 4 | Create global CSS with design system and responsive styles | DONE | commit: 466076c
+2025-11-23T12:41:00 | CHECKLIST 5 | Create app.js scaffolding and header/footer components | DONE | commit: ede3289
+2025-11-23T12:42:00 | CHECKLIST 6 | Create Firebase client library with helpers | DONE | commit: 60105fe
+2025-11-23T12:43:00 | CHECKLIST 7 | Create register/login pages and auth logic | DONE | commit: 836ef52
+2025-11-23T12:44:00 | CHECKLIST 8 | Create admin seed script for role assignment | DONE | commit: 4a7a83d
+2025-11-23T12:45:00 | CHECKLIST 9 | Create admin panel pages and auth guard | DONE | commit: 5e190ac
+2025-11-23T12:46:00 | CHECKLIST 10 | Add Firestore schema doc and sample data seed script | DONE | commit: e8676e9
+2025-11-23T12:47:00 | CHECKLIST 11-12 | Create teachers list and detail pages | DONE | commit: 8d5ccd1
+2025-11-23T12:48:00 | CHECKLIST 13-15 | Create booking flow and Cloud Functions | DONE | commit: 0dc7bd0
+2025-11-23T12:49:00 | CHECKLIST 16-17 | Create notifications UI and real-time listener | DONE | commit: 1012790
+
 Format: <ISO timestamp> | CHECKLIST <n> | <description> | STATUS | commit: <sha>
 
 ---

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenciler - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <section class="students-section">
+        <div class="container">
+            <h1>Öğrenciler</h1>
+            <div id="students-list"></div>
+        </div>
+    </section>
+    <div id="footer-container"></div>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/authGuard.js"></script>
+    <script>
+        requireAuth(['admin', 'teacher']);
+        window.addEventListener('authStateChanged', async (e) => {
+            if (!e.detail.user) return;
+            const container = document.getElementById('students-list');
+            const role = await window.fb.getUserRole(e.detail.user.uid);
+            let studentsQuery = window.fb.db.collection('users').where('role', '==', 'student');
+            if (role === 'teacher') {
+                const bookings = await window.fb.db.collection('bookings')
+                    .where('teacherId', '==', e.detail.user.uid)
+                    .where('status', '==', 'confirmed')
+                    .get();
+                const studentIds = [...new Set(bookings.docs.map(d => d.data().studentId))];
+                if (studentIds.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><p>Henüz öğrenciniz yok</p></div>';
+                    return;
+                }
+                studentsQuery = window.fb.db.collection('users').where(window.fb.firebase.firestore.FieldPath.documentId(), 'in', studentIds);
+            }
+            const snapshot = await studentsQuery.get();
+            if (snapshot.empty) {
+                container.innerHTML = '<div class="empty-state"><p>Öğrenci bulunamadı</p></div>';
+                return;
+            }
+            container.innerHTML = snapshot.docs.map(doc => {
+                const s = doc.data();
+                return `<div class="student-card">
+                    <h3>${s.displayName}</h3>
+                    <p>${s.email}</p>
+                    <p><strong>Kayıt:</strong> ${s.createdAt?.toDate ? s.createdAt.toDate().toLocaleDateString('tr-TR') : 'N/A'}</p>
+                </div>`;
+            }).join('');
+        });
+    </script>
+</body>
+</html>
+<style>
+.students-section { padding: 3rem 0; min-height: 100vh; background: var(--color-bg-secondary); }
+.student-card { background: white; padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1rem; box-shadow: var(--shadow-sm); }
+.student-card h3 { margin-bottom: 0.5rem; }
+</style>
