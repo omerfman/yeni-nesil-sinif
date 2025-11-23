@@ -28,11 +28,16 @@ window.initializeFirebase = function(config) {
     db = firebase.firestore(app);
     storage = firebase.storage ? firebase.storage(app) : null;
     
-    // Enable Firestore offline persistence
-    db.enablePersistence({ synchronizeTabs: true })
-      .catch((err) => {
-        console.warn('Firestore persistence error:', err.code);
-      });
+    // Enable Firestore offline persistence (no warning)
+    try {
+      db.enablePersistence({ synchronizeTabs: true });
+    } catch (err) {
+      if (err.code === 'failed-precondition') {
+        console.warn('Persistence failed: Multiple tabs open');
+      } else if (err.code === 'unimplemented') {
+        console.warn('Persistence not available in this browser');
+      }
+    }
     
     console.log('✅ Firebase initialized successfully');
     
