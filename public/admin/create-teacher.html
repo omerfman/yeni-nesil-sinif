@@ -178,7 +178,7 @@
             
             try {
                 // Create teacher account via serverless function
-                const response = await fetch('/api/createTeacher', {
+                const response = await fetch('https://yns-web.vercel.app/api/createTeacher', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

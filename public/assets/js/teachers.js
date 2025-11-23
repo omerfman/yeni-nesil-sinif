@@ -238,3 +238,19 @@ window.teachersModule = {
   loadTeachers,
   loadTeacherDetail,
 };
+
+// Admin için "Öğretmen Ekle" butonu göster
+document.addEventListener('DOMContentLoaded', async () => {
+  const btnContainer = document.getElementById('admin-add-teacher-btn');
+  if (btnContainer && window.firebase && window.fb && window.fb.getUserRole) {
+    const user = window.firebase.auth().currentUser;
+    if (user) {
+      window.fb.getUserRole(user.uid).then(role => {
+        if (role === 'admin') {
+          btnContainer.innerHTML = `<a href="/admin/create-teacher.html" class="btn btn-primary">+ Öğretmen Ekle</a>`;
+          btnContainer.style.display = 'block';
+        }
+      });
+    }
+  }
+});
