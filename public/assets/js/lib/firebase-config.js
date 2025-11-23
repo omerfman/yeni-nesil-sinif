@@ -12,22 +12,15 @@
  */
 
 (function() {
-  // Try to read from environment variables (if build process injects them)
-  // Otherwise, use placeholder values that user must replace
+  // Firebase Configuration for yeni-nesil-sinif-adm
   const firebaseConfig = {
-    apiKey: typeof FIREBASE_API_KEY !== 'undefined' ? FIREBASE_API_KEY : 'YOUR_API_KEY_HERE',
-    authDomain: typeof FIREBASE_AUTH_DOMAIN !== 'undefined' ? FIREBASE_AUTH_DOMAIN : 'YOUR_PROJECT_ID.firebaseapp.com',
-    projectId: typeof FIREBASE_PROJECT_ID !== 'undefined' ? FIREBASE_PROJECT_ID : 'YOUR_PROJECT_ID',
-    storageBucket: typeof FIREBASE_STORAGE_BUCKET !== 'undefined' ? FIREBASE_STORAGE_BUCKET : 'YOUR_PROJECT_ID.appspot.com',
-    messagingSenderId: typeof FIREBASE_MESSAGING_SENDER_ID !== 'undefined' ? FIREBASE_MESSAGING_SENDER_ID : 'YOUR_SENDER_ID',
-    appId: typeof FIREBASE_APP_ID !== 'undefined' ? FIREBASE_APP_ID : 'YOUR_APP_ID',
+    apiKey: "AIzaSyAe51HzG6O-xyv6ZlgP9Z9MQWUq4-aQ_kg",
+    authDomain: "yeni-nesil-sinif-adm.firebaseapp.com",
+    projectId: "yeni-nesil-sinif-adm",
+    storageBucket: "yeni-nesil-sinif-adm.firebasestorage.app",
+    messagingSenderId: "50832277016",
+    appId: "1:50832277016:web:d8b6114a2c99d6ab31cd6d"
   };
-  
-  // Check if valid config
-  if (firebaseConfig.apiKey === 'YOUR_API_KEY_HERE') {
-    console.warn('⚠️ Firebase config not set. Please update firebase-config.js or set environment variables.');
-    console.warn('See .env.local.example for required variables.');
-  }
   
   // Store config globally for firebase.js to use
   window.FIREBASE_CONFIG = firebaseConfig;
