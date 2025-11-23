@@ -8,29 +8,18 @@
  */
 async function createBooking(bookingData) {
   try {
-    // Call Cloud Function
-    const functionsUrl = 'https://us-central1-YOUR_PROJECT_ID.cloudfunctions.net/createBooking';
-    // Note: Replace with your actual Cloud Functions URL
-    
-    const currentUser = window.fb.getCurrentUser();
-    if (!currentUser) {
-      throw new Error('Giriş yapmalısınız');
-    }
-    
-    const idToken = await currentUser.getIdToken();
-    
-    const response = await fetch(functionsUrl, {
+    // Call Vercel Serverless Function (FREE!)
+    const response = await fetch('/api/createBooking', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${idToken}`
       },
       body: JSON.stringify(bookingData)
     });
     
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(error.message || 'Randevu oluşturulamadı');
+      throw new Error(error.error || 'Randevu oluşturulamadı');
     }
     
     const result = await response.json();
