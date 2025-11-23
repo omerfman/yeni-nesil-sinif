@@ -39,9 +39,9 @@ Her satır başlangıçta [o] olacak. Tamamlandığında [x] ile değiştirilece
 
 [x] 17. Cloud Function: scheduleNotifications (functions/index.js) — run: implement scheduled function or Cloud Scheduler integration that finds bookings starting ~30min and writes notification docs for teacher & student
 
-[o] 18. Assignments module: public/assignments/index.html + assets/js/assignments.js + Firebase Storage logic — run: create teacher assignment creation form, student view & upload submission; store files in storage and meta in assignments collection
+[x] 18. Assignments module: public/assignments/index.html + assets/js/assignments.js + Firebase Storage logic — run: create teacher assignment creation form, student view & upload submission; store files in storage and meta in assignments collection
 
-[o] 19. Students pages: public/students/index.html (admin view all, teacher view only own students) — run: implement queries + UI with auth guard
+[x] 19. Students pages: public/students/index.html (admin view all, teacher view only own students) — run: implement queries + UI with auth guard
 
 [o] 20. Auth guard & role checks (assets/js/authGuard.js) — run: implement client-side guard helpers; sensitive ops to double-check server-side in functions where needed
 
