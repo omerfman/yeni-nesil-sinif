@@ -26,7 +26,7 @@ window.initializeFirebase = function(config) {
     // Get service instances
     auth = firebase.auth(app);
     db = firebase.firestore(app);
-    storage = firebase.storage(app);
+    storage = firebase.storage ? firebase.storage(app) : null;
     
     // Enable Firestore offline persistence
     db.enablePersistence({ synchronizeTabs: true })
