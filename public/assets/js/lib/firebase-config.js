@@ -19,7 +19,8 @@
     projectId: "yeni-nesil-sinif-adm",
     storageBucket: "yeni-nesil-sinif-adm.firebasestorage.app",
     messagingSenderId: "50832277016",
-    appId: "1:50832277016:web:d8b6114a2c99d6ab31cd6d"
+    appId: "1:50832277016:web:d8b6114a2c99d6ab31cd6d",
+    measurementId: "G-QWF8L7WEKT"
   };
   
   // Store config globally for firebase.js to use
