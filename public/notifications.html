@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildirimler - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="notifications-section">
+        <div class="container">
+            <div class="notifications-header">
+                <h1>Bildirimler</h1>
+                <button class="btn btn-sm btn-secondary" id="mark-all-read">Tümünü Okundu İşaretle</button>
+            </div>
+            
+            <div id="notifications-list" class="notifications-container"></div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/authGuard.js"></script>
+    <script src="/assets/js/notifications.js"></script>
+    
+    <script>
+        requireAuth();
+        
+        window.addEventListener('authStateChanged', (e) => {
+            if (e.detail.user) {
+                window.notificationsModule.loadNotifications(e.detail.user.uid);
+            }
+        });
+        
+        document.getElementById('mark-all-read')?.addEventListener('click', async () => {
+            const user = window.fb.getCurrentUser();
+            if (user) {
+                await window.notificationsModule.markAllAsRead(user.uid);
+            }
+        });
+    </script>
+</body>
+</html>
+
+<style>
+.notifications-section { padding: 3rem 0; min-height: 100vh; background: var(--color-bg-secondary); }
+.notifications-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.notifications-container { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-sm); }
+.notification-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--color-border); cursor: pointer; transition: background-color var(--transition-fast); position: relative; }
+.notification-item:last-child { border-bottom: none; }
+.notification-item:hover { background-color: var(--color-bg-muted); }
+.notification-unread { background-color: #FEF2F2; }
+.notification-icon { font-size: 1.5rem; flex-shrink: 0; }
+.notification-content { flex: 1; }
+.notification-content h4 { margin: 0 0 0.25rem 0; font-size: var(--font-size-base); color: var(--color-text); }
+.notification-content p { margin: 0 0 0.25rem 0; color: var(--color-text-light); font-size: var(--font-size-sm); }
+.notification-time { font-size: var(--font-size-xs); color: var(--color-text-muted); }
+.notification-indicator { width: 10px; height: 10px; background-color: var(--color-primary); border-radius: 50%; flex-shrink: 0; }
+@media (max-width: 768px) { .notifications-header { flex-direction: column; align-items: stretch; gap: 1rem; } }
+</style>
