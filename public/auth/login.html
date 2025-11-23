@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Login Form Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <h1>Giriş Yap</h1>
+                    <p class="auth-subtitle">Hesabınıza giriş yapın ve öğrenmeye devam edin.</p>
+                    
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="email">E-posta</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required 
+                                placeholder="ornek@email.com"
+                                autocomplete="email"
+                            >
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Şifre</label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required 
+                                placeholder="Şifreniz"
+                                autocomplete="current-password"
+                            >
+                        </div>
+                        
+                        <div class="form-group form-checkbox">
+                            <label>
+                                <input type="checkbox" id="remember" name="remember">
+                                <span>Beni hatırla</span>
+                            </label>
+                            <a href="/auth/forgot-password.html" class="forgot-password">Şifremi unuttum</a>
+                        </div>
+                        
+                        <div id="error-message" class="error-message" style="display: none;"></div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large btn-block" id="login-button">
+                            Giriş Yap
+                        </button>
+                    </form>
+                    
+                    <div class="auth-footer">
+                        <p>Hesabınız yok mu? <a href="/auth/register.html">Kayıt Olun</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    
+    <!-- App Scripts -->
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/auth.js"></script>
+</body>
+</html>
+
+<style>
+.auth-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%);
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-xl);
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 100%;
+}
+
+.auth-card h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.auth-subtitle {
+    text-align: center;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--color-text);
+    font-size: var(--font-size-sm);
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.form-checkbox {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-checkbox label {
+    display: flex;
+    gap: 0.5rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.error-message {
+    padding: 0.75rem;
+    background-color: #FEE2E2;
+    color: #991B1B;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.auth-footer p {
+    color: var(--color-text-light);
+    margin: 0;
+}
+
+.auth-footer a {
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+@media (max-width: 640px) {
+    .auth-card {
+        padding: 1.5rem;
+    }
+}
+</style>
