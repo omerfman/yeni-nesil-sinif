@@ -72,10 +72,10 @@ module.exports = async (req, res) => {
       const notificationRef = db.collection('notifications').doc();
       transaction.set(notificationRef, {
         userId: teacherId,
-        type: 'new_booking',
-        title: 'Yeni Randevu Talebi',
-        message: `${timeSlot} için yeni bir randevu talebi aldınız.`,
-        bookingId: bookingRef.id,
+        type: 'booking_created',
+        title: 'Yeni Ders Talebi',
+        message: `${date} tarihinde ${timeSlot} için yeni bir ders talebi aldınız.`,
+        relatedId: bookingRef.id,
         read: false,
         createdAt: admin.firestore.FieldValue.serverTimestamp(),
       });
