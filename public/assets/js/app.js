@@ -41,6 +41,23 @@ function initializeHeader() {
   // Check auth state and update UI
   updateHeaderAuthState();
   
+  // Logout button handler
+  const logoutButton = document.getElementById('logout-button');
+  if (logoutButton) {
+    logoutButton.addEventListener('click', async () => {
+      try {
+        await window.fb.auth.signOut();
+        showToast('Başarıyla çıkış yaptınız', 'success');
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1000);
+      } catch (error) {
+        console.error('Logout error:', error);
+        showToast('Çıkış yapılırken bir hata oluştu', 'error');
+      }
+    });
+  }
+  
   // Mobile menu toggle
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
