@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevu Detay - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="booking-section">
+        <div class="container">
+            <div id="booking-detail-container"></div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/authGuard.js"></script>
+    <script src="/assets/js/bookings.js"></script>
+    
+    <script>
+        requireAuth();
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookingId = urlParams.get('id');
+        
+        if (!bookingId) {
+            document.getElementById('booking-detail-container').innerHTML = 
+                '<div class="empty-state"><p>Randevu ID bulunamadı</p></div>';
+        } else {
+            document.addEventListener('DOMContentLoaded', async () => {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                window.bookingsModule.loadBookingDetail(bookingId);
+            });
+        }
+    </script>
+</body>
+</html>
+
+<style>
+.booking-section { padding: 3rem 0; min-height: 100vh; background: var(--color-bg-secondary); }
+.booking-detail-card { background: white; padding: 2rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+.detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 2rem 0; }
+.detail-item { display: flex; flex-direction: column; gap: 0.25rem; }
+.detail-item label { font-weight: 600; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.detail-item span { font-size: var(--font-size-base); color: var(--color-text); }
+.status-badge { padding: 0.25rem 0.75rem; border-radius: var(--radius-full); font-size: var(--font-size-sm); font-weight: 600; }
+.status-confirmed { background: #D1FAE5; color: #065F46; }
+.status-pending { background: #FEF3C7; color: #92400E; }
+.status-completed { background: #DBEAFE; color: #1E40AF; }
+.status-cancelled { background: #FEE2E2; color: #991B1B; }
+.meeting-link-section, .notes-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
+@media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; gap: 1rem; } }
+</style>
