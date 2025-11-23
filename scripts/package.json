@@ -1,0 +1,14 @@
+{
+  "name": "yns-scripts",
+  "version": "1.0.0",
+  "description": "Utility scripts for Yeni Nesil Sınıf",
+  "private": true,
+  "scripts": {
+    "seed-admin": "node seedAdmin.js",
+    "seed-data": "node seedSampleData.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.11.0",
+    "dotenv": "^16.3.1"
+  }
+}
