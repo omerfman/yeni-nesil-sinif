@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Nesil Sınıf - Modern Online Eğitim Platformu</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <!-- Header will be loaded dynamically -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Öğretmeninizi Bulun, <br>Öğrenmeye Başlayın</h1>
+                <p class="hero-subtitle">Yeni Nesil Sınıf ile uzman öğretmenlerden birebir ders alın. Esnek randevu sistemi, canlı dersler ve ödevlerle öğrenme deneyiminizi kişiselleştirin.</p>
+                <div class="hero-actions">
+                    <a href="/auth/register.html" class="btn btn-primary">Hemen Başla</a>
+                    <a href="/auth/login.html" class="btn btn-secondary">Giriş Yap</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="/assets/img/hero-illustration.svg" alt="Online Eğitim" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Nasıl Çalışır?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Öğretmen Seçin</h3>
+                    <p>Uzmanlık alanlarına, deneyimlerine ve öğrenci değerlendirmelerine göre size en uygun öğretmeni bulun.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Randevu Alın</h3>
+                    <p>Öğretmeninizin müsait olduğu saatlerden size uygun olanı seçin ve randevunuzu onaylayın.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Öğrenmeye Başlayın</h3>
+                    <p>Canlı derslerinize katılın, ödevlerinizi tamamlayın ve ilerlemenizi takip edin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Teachers -->
+    <section class="featured-teachers">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Popüler Öğretmenler</h2>
+                <a href="/teachers/index.html" class="link">Tümünü Gör →</a>
+            </div>
+            <div class="teacher-grid" id="featured-teachers-list">
+                <!-- Teacher cards will be loaded dynamically -->
+                <div class="teacher-card teacher-card-skeleton">
+                    <div class="teacher-avatar skeleton"></div>
+                    <div class="teacher-info">
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text-sm"></div>
+                    </div>
+                </div>
+                <div class="teacher-card teacher-card-skeleton">
+                    <div class="teacher-avatar skeleton"></div>
+                    <div class="teacher-info">
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text-sm"></div>
+                    </div>
+                </div>
+                <div class="teacher-card teacher-card-skeleton">
+                    <div class="teacher-avatar skeleton"></div>
+                    <div class="teacher-info">
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Öğrenme Yolculuğunuza Bugün Başlayın</h2>
+                <p>Binlerce öğrenci Yeni Nesil Sınıf ile hedeflerine ulaştı. Siz de aramıza katılın!</p>
+                <a href="/auth/register.html" class="btn btn-primary btn-large">Ücretsiz Kayıt Ol</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be loaded dynamically -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/app.js"></script>
+    <script>
+        // Load featured teachers on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            // This will be implemented when teachers.js is ready
+            // For now, show placeholder message
+            const container = document.getElementById('featured-teachers-list');
+            if (container) {
+                setTimeout(() => {
+                    container.innerHTML = `
+                        <div class="teacher-card">
+                            <div class="teacher-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <div class="teacher-info">
+                                <h3 class="teacher-name">Örnek Öğretmen</h3>
+                                <p class="teacher-subjects">Matematik, Fizik</p>
+                                <div class="teacher-meta">
+                                    <span class="teacher-price">₺150/saat</span>
+                                    <span class="teacher-rating">⭐ 4.9</span>
+                                </div>
+                                <a href="/teachers/index.html" class="btn btn-sm btn-outline">Profili Gör</a>
+                            </div>
+                        </div>
+                        <div class="empty-state">
+                            <p>Daha fazla öğretmen görmek için <a href="/teachers/index.html">tıklayın</a></p>
+                        </div>
+                    `;
+                }, 500);
+            }
+        });
+    </script>
+</body>
+</html>
