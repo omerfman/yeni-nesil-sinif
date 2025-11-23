@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretmenler - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="teachers-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Öğretmenlerimiz</h1>
+                <p>Uzman öğretmenlerimiz arasından size en uygun olanı seçin</p>
+            </div>
+
+            <div id="teachers-list" class="teacher-grid"></div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/teachers.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            window.teachersModule.loadTeachers();
+        });
+    </script>
+</body>
+</html>
+
+<style>
+.teachers-section { padding: 3rem 0; min-height: 100vh; background: var(--color-bg-secondary); }
+.page-header { text-align: center; margin-bottom: 3rem; }
+.page-header h1 { margin-bottom: 0.5rem; }
+.page-header p { color: var(--color-text-light); margin: 0; }
+.teacher-bio { font-size: var(--font-size-sm); color: var(--color-text-light); margin: 0.5rem 0; }
+</style>

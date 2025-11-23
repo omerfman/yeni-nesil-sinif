@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretmen Detay - Yeni Nesil Sınıf</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <section class="teacher-detail-section">
+        <div class="container">
+            <div id="teacher-detail-container"></div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="/assets/js/lib/firebase-config.js"></script>
+    <script src="/assets/js/lib/firebase.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/teachers.js"></script>
+    
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const teacherId = urlParams.get('id');
+        
+        if (!teacherId) {
+            document.getElementById('teacher-detail-container').innerHTML = 
+                '<div class="empty-state"><p>Öğretmen ID\'si bulunamadı.</p></div>';
+        } else {
+            document.addEventListener('DOMContentLoaded', async () => {
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                window.teachersModule.loadTeacherDetail(teacherId);
+            });
+        }
+    </script>
+</body>
+</html>
+
+<style>
+.teacher-detail-section { padding: 3rem 0; min-height: 100vh; background: var(--color-bg-secondary); }
+.teacher-header { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; background: white; padding: 2rem; border-radius: var(--radius-xl); margin-bottom: 2rem; box-shadow: var(--shadow-sm); }
+.teacher-avatar-large { width: 200px; height: 200px; border-radius: var(--radius-full); background-size: cover; background-position: center; }
+.teacher-subjects-large { color: var(--color-text-light); margin-bottom: 1rem; }
+.teacher-stats { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+.stat-item { text-align: center; }
+.stat-value { display: block; font-size: var(--font-size-2xl); font-weight: bold; color: var(--color-primary); }
+.stat-label { display: block; font-size: var(--font-size-sm); color: var(--color-text-muted); }
+.teacher-content { background: white; padding: 2rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); }
+.teacher-section { margin-bottom: 2rem; }
+.teacher-section:last-child { margin-bottom: 0; }
+.teacher-section h2 { margin-bottom: 1rem; font-size: var(--font-size-xl); }
+.availability-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.availability-item { padding: 0.5rem; background: var(--color-bg-muted); border-radius: var(--radius-md); }
+@media (max-width: 768px) { .teacher-header { grid-template-columns: 1fr; } .teacher-avatar-large { margin: 0 auto; } }
+</style>
