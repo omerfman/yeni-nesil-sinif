@@ -14,6 +14,7 @@
 2025-11-23T12:48:00 | CHECKLIST 13-15 | Create booking flow and Cloud Functions | DONE | commit: 0dc7bd0
 2025-11-23T12:49:00 | CHECKLIST 16-17 | Create notifications UI and real-time listener | DONE | commit: 1012790
 2025-11-23T12:55:00 | CHECKLIST 18-19 | Create assignments and students pages | DONE | commit: f1da469
+2025-11-23T13:00:00 | CHECKLIST 20-26 | Add Firebase config, security rules, Prettier | DONE | commit: 1949ee6
 
 Format: <ISO timestamp> | CHECKLIST <n> | <description> | STATUS | commit: <sha>
 

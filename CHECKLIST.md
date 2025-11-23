@@ -43,23 +43,23 @@ Her satır başlangıçta [o] olacak. Tamamlandığında [x] ile değiştirilece
 
 [x] 19. Students pages: public/students/index.html (admin view all, teacher view only own students) — run: implement queries + UI with auth guard
 
-[o] 20. Auth guard & role checks (assets/js/authGuard.js) — run: implement client-side guard helpers; sensitive ops to double-check server-side in functions where needed
+[x] 20. Auth guard & role checks (assets/js/authGuard.js) — run: implement client-side guard helpers; sensitive ops to double-check server-side in functions where needed
 
-[o] 21. Common header/footer components (public/components/) — run: create public/components/header.html, footer.html and client code to include them
+[x] 21. Common header/footer components (public/components/) — run: create public/components/header.html, footer.html and client code to include them
 
-[o] 22. Accessibility & responsive fixes, focus states, aria labels — run: run quick audit and add fixes in CSS/HTML
+[x] 22. Accessibility & responsive fixes, focus states, aria labels — run: run quick audit and add fixes in CSS/HTML
 
-[o] 23. .env.local.example finalize, README run & deploy instructions update — run: ensure example env names and write README steps: firebase setup, functions deploy, Vercel deploy
+[x] 23. .env.local.example finalize, README run & deploy instructions update — run: ensure example env names and write README steps: firebase setup, functions deploy, Vercel deploy
 
-[o] 24. Firebase functions local emulator & smoke test scripts (scripts/smokeBookingTest.js) — run: add emulator scripts and a test that tries concurrent bookings
+[x] 24. Firebase functions local emulator & smoke test scripts (scripts/smokeBookingTest.js) — run: add emulator scripts and a test that tries concurrent bookings
 
-[o] 25. Vercel deploy config (vercel.json) + instructions for adding env vars in Vercel — run: create vercel.json and README Vercel section
+[x] 25. Vercel deploy config (vercel.json) + instructions for adding env vars in Vercel — run: create vercel.json and README Vercel section
 
-[o] 26. Prettier setup and optional husky pre-commit for formatting — run: add prettier config and pre-commit hook to run prettier --check on staged files
+[x] 26. Prettier setup and optional husky pre-commit for formatting — run: add prettier config and pre-commit hook to run prettier --check on staged files
 
 [o] 27. Minimal E2E smoke test (tests/smokeTest.js or Playwright) — run: add test that registers student (client), seed teacher (script), student books lesson, verify booking exists & notification created
 
-[o] 28. Final check: npm run lint/build (if relevant), local serve of public folder, update CHECKLIST.md status and commit all — run: run smoke scripts, serve public folder and verify homepage loads
+[x] 28. Final check: npm run lint/build (if relevant), local serve of public folder, update CHECKLIST.md status and commit all — run: run smoke scripts, serve public folder and verify homepage loads
 
 ---
 
