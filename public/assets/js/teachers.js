@@ -239,18 +239,27 @@ window.teachersModule = {
   loadTeacherDetail,
 };
 
-// Admin için "Öğretmen Ekle" butonu göster
-document.addEventListener('DOMContentLoaded', async () => {
+// Admin için "Öğretmen Ekle" butonu göster (Firebase initialize ve authStateChanged sonrası)
+document.addEventListener('DOMContentLoaded', () => {
   const btnContainer = document.getElementById('admin-add-teacher-btn');
-  if (btnContainer && window.firebase && window.fb && window.fb.getUserRole) {
-    const user = window.firebase.auth().currentUser;
-    if (user) {
-      window.fb.getUserRole(user.uid).then(role => {
+  if (!btnContainer) return;
+
+  window.addEventListener('authStateChanged', async (e) => {
+    const user = e.detail.user;
+    if (user && window.fb && window.fb.getUserRole) {
+      try {
+        const role = await window.fb.getUserRole(user.uid);
         if (role === 'admin') {
           btnContainer.innerHTML = `<a href="/admin/create-teacher.html" class="btn btn-primary">+ Öğretmen Ekle</a>`;
           btnContainer.style.display = 'block';
+        } else {
+          btnContainer.style.display = 'none';
         }
-      });
+      } catch (err) {
+        btnContainer.style.display = 'none';
+      }
+    } else {
+      btnContainer.style.display = 'none';
     }
-  }
+  });
 });
