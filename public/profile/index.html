@@ -20,26 +20,15 @@
     <div id="footer-container"></div>
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/authGuard.js"></script>
+    <script src="/assets/js/profile.js"></script>
     <script>
         requireAuth();
         window.addEventListener('authStateChanged', async (e) => {
             const user = e.detail.user;
             if (!user) return;
-            const profileInfo = document.getElementById('profile-info');
             const doc = await window.fb.db.collection('users').doc(user.uid).get();
-            if (!doc.exists) {
-                profileInfo.innerHTML = '<div class="empty-state"><p>Profil bilgisi bulunamadı.</p></div>';
-                return;
-            }
-            const data = doc.data();
-            profileInfo.innerHTML = `
-                <div class="profile-card">
-                    <h2>${data.displayName || user.displayName}</h2>
-                    <p><strong>E-posta:</strong> ${data.email || user.email}</p>
-                    <p><strong>Rol:</strong> ${data.role}</p>
-                    <p><strong>Kayıt Tarihi:</strong> ${data.createdAt?.toDate ? data.createdAt.toDate().toLocaleDateString('tr-TR') : 'N/A'}</p>
-                </div>
-            `;
+            const data = doc.exists ? doc.data() : {};
+            window.profileModule.renderProfileForm(user, data);
         });
     </script>
 </body>
