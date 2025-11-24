@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğretmen Profilim</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <section class="profile-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Profilim (Öğretmen)</h1>
+                <p>Kişisel bilgilerinizi görüntüleyin ve düzenleyin.</p>
+            </div>
+            <div id="profile-info"></div>
+        </div>
+    </section>
+    <div id="footer-container"></div>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/authGuard.js"></script>
+    <script src="/assets/js/profile.js"></script>
+    <script>
+        requireAuth();
+        window.addEventListener('authStateChanged', async (e) => {
+            const user = e.detail.user;
+            if (!user) return;
+            const doc = await window.fb.db.collection('users').doc(user.uid).get();
+            const data = doc.exists ? doc.data() : {};
+            window.profileModule.renderProfileForm(user, data);
+        });
+    </script>
+</body>
+</html>
