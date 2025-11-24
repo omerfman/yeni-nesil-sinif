@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randevu Oluştur</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <section class="booking-section">
+        <div class="container">
+            <div class="page-header">
+                <h1>Randevu Oluştur</h1>
+                <p>Öğretmen ile yeni bir ders randevusu oluşturun.</p>
+            </div>
+            <div id="booking-form-container"></div>
+            <div id="error-message" class="error-message" style="display:none;"></div>
+            <div id="success-message" class="success-message" style="display:none;"></div>
+        </div>
+    </section>
+    <div id="footer-container"></div>
+    <script src="/assets/js/app.js"></script>
+    <script src="/assets/js/bookings.js"></script>
+    <script>
+        // Sayfa yüklendiğinde öğretmenId parametresini al
+        const urlParams = new URLSearchParams(window.location.search);
+        const teacherId = urlParams.get('teacherId');
+        if (!teacherId) {
+            document.getElementById('error-message').textContent = 'Geçersiz öğretmen bilgisi.';
+            document.getElementById('error-message').style.display = 'block';
+        } else {
+            window.bookingsModule.renderBookingForm(teacherId);
+        }
+    </script>
+</body>
+</html>
