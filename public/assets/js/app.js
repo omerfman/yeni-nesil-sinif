@@ -58,19 +58,11 @@ function initializeHeader() {
   // Check auth state and update UI
   updateHeaderAuthState();
 
-  // Profilim butonunu dinamik olarak yönlendir
-  window.addEventListener('authStateChanged', async (e) => {
-    const user = e.detail.user;
-    const profileLink = document.querySelector('.header-user-menu .nav-link[href^="/profile"]');
-    if (user && profileLink && window.fb && window.fb.getUserRole) {
-      const role = await window.fb.getUserRole(user.uid);
-      if (role === 'teacher') {
-        profileLink.setAttribute('href', '/profile/teacher.html');
-      } else {
-        profileLink.setAttribute('href', '/profile/index.html');
-      }
-    }
-  });
+  // Profilim butonunu sabit olarak /profile/index.html'e yönlendir
+  const profileLink = document.querySelector('.header-user-menu .nav-link[href^="/profile"]');
+  if (profileLink) {
+    profileLink.setAttribute('href', '/profile/index.html');
+  }
   
   // Logout button handler
   const logoutButton = document.getElementById('logout-button');

@@ -28,6 +28,13 @@
             if (!user) return;
             const doc = await window.fb.db.collection('users').doc(user.uid).get();
             const data = doc.exists ? doc.data() : {};
+            // Role göre başlık ve alanları güncelle
+            const pageHeader = document.querySelector('.page-header h1');
+            if (data.role === 'teacher') {
+                pageHeader.textContent = 'Profilim (Öğretmen)';
+            } else {
+                pageHeader.textContent = 'Profilim';
+            }
             window.profileModule.renderProfileForm(user, data);
         });
     </script>
