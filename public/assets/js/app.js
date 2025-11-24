@@ -10,6 +10,23 @@ window.app = {
   notificationCount: 0,
 };
 
+// Her sayfa yüklemesinde ve auth değiştiğinde header'ı güncelle
+function syncHeaderWithAuth() {
+  // Firebase hazırsa ve auth mevcutsa
+  if (window.firebase && window.firebase.auth) {
+    window.firebase.auth().onAuthStateChanged(function(user) {
+      window.app.currentUser = user;
+      updateHeaderAuthState();
+    });
+  }
+}
+
+// Diğer tablarda oturum değişikliği olduğunda da header güncellensin
+window.addEventListener('storage', function(e) {
+  if (e.key === 'firebase:authUser') {
+    syncHeaderWithAuth();
+  }
+});
 /**
  * Load component HTML from /components folder
  */
@@ -202,6 +219,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.dispatchEvent(new CustomEvent('authStateChanged', { detail: { user } }));
     });
   }
+  syncHeaderWithAuth();
 });
 
 // Add animation keyframes
