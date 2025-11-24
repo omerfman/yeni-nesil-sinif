@@ -23,7 +23,10 @@
     <script src="/assets/js/app.js"></script>
     <script src="/assets/js/authGuard.js"></script>
     <script>
-        requireAuth(['admin', 'teacher']);
+        // Firebase initialize edildikten sonra auth kontrolü yap
+        window.addEventListener('firebaseInitialized', () => {
+            requireAuth(['/admin', '/teacher']);
+        });
         window.addEventListener('authStateChanged', async (e) => {
             if (!e.detail.user) return;
             const container = document.getElementById('students-list');
